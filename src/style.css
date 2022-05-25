@@ -22,6 +22,8 @@ h1 {
     font-size: 1.2rem;
     font-family: 'Comfortaa', cursive;
     letter-spacing: 2px;
+    cursor: pointer;
+    color: #6FFACC;
 }
 
 header {
@@ -32,7 +34,7 @@ header {
     align-items: center;
 }
 
-.search-container input {
+.search-bar input {
     padding: 4px 8px 4px 32px;
     color: white;
     font-size: 1rem;
@@ -42,11 +44,15 @@ header {
     background-color: transparent;
 }
 
-.search-container {
+.search-bar input:focus {
+    outline: none;
+}
+
+.search-bar {
     position: relative;
 }
 
-.search-container label {
+.search-bar label {
     height: 16px;
     position: absolute;
     left: 8px;
@@ -54,6 +60,19 @@ header {
     transform: translateY(-50%);
 }
 
-.search-container .icon {
+.search-bar .icon {
     height: 100%;
+}
+
+.search-bar button {
+    font-size: 0.9rem;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    color: #6FFACC;
+    font-weight: 700;
+    cursor: pointer;
 }

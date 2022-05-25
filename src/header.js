@@ -1,8 +1,9 @@
 import SEARCH_ICON from './icons/search.svg';
+import getWeatherData from './apiHandler';
 
 const searchBar = (() => {
   const container = document.createElement('div');
-  container.classList.add('search-container');
+  container.classList.add('search-bar');
   const searchLabel = document.createElement('label');
   searchLabel.setAttribute('for', 'search-input');
   const searchIcon = document.createElement('img');
@@ -12,7 +13,14 @@ const searchBar = (() => {
   const searchInput = document.createElement('input');
   searchInput.id = 'search-input';
   searchInput.setAttribute('placeholder', 'Search');
-  container.append(searchLabel, searchInput);
+  const searchButton = document.createElement('button');
+  searchButton.classList.add('search-button');
+  searchButton.textContent = 'Go!';
+  searchButton.addEventListener('click', async () => {
+    if (!searchInput.value) return;
+    console.log(await getWeatherData(searchInput.value));
+  });
+  container.append(searchLabel, searchInput, searchButton);
   return container;
 })();
 
