@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Montserrat:wght@300&family=Roboto:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Montserrat:wght@300&family=Poppins:wght@300&display=swap');
 
 :root {
     font-size: 16px;
@@ -11,10 +11,11 @@
 }
 
 body {
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #434656;
+    background-image: linear-gradient(to right bottom, #434656, #3b3e52, #32374d, #2a2f49, #222844);
     color: #ffffff;
 }
 
@@ -28,8 +29,8 @@ h1 {
 
 header {
     padding: 16px 24px;
-    font-family: 'Montserrat', sans-serif;
     display: flex;
+    gap: 16px;
     justify-content: space-between;
     align-items: center;
 }
@@ -40,7 +41,7 @@ header {
     font-size: 1rem;
     border-radius: 16px;
     border: 2px solid white;
-    width: 300px;
+    width: 100%;
     background-color: transparent;
 }
 
@@ -50,6 +51,8 @@ header {
 
 .search-bar {
     position: relative;
+    flex: 1;
+    max-width: 300px;
 }
 
 .search-bar label {
@@ -62,6 +65,7 @@ header {
 
 .search-bar .icon {
     height: 100%;
+    position: absolute;
 }
 
 .search-bar button {
@@ -75,4 +79,83 @@ header {
     color: #6FFACC;
     font-weight: 700;
     cursor: pointer;
+}
+
+main {
+    padding: 32px;
+    justify-content: center;
+    flex: 1;
+    margin: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.current-weather {
+    min-width: 500px;
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #3D4564;
+    border-radius: 8px;
+    grid-row: 1 / -1;
+}
+
+.current-weather .city-info {
+    text-align: center;
+}
+
+.current-weather .city-name {
+    font-size: 3rem;
+    color: #6FFACC;
+}
+
+.weather-info {
+    margin-top: 24px;
+}
+
+.weather-info .temperature {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.weather-info .temperature .small {
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 32px;
+}
+
+.extra {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    justify-items: center;
+    font-size: 1rem;
+}
+
+.extra .data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.data .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.extra .data img {
+    width: 32px;
+}
+
+.weather-condition {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-condition img {
+    width: 96px;
 }
