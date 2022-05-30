@@ -1,11 +1,6 @@
-import FEELS_LIKE from './icons/weather/feels-like.svg';
-import HUMIDITY from './icons/weather/humidity.svg';
-import WIND_SPEED from './icons/weather/wind-speed.svg';
-import CLOUDINESS from './icons/weather/cloudiness.svg';
-import SUNRISE from './icons/weather/sunrise.svg';
-import SUNSET from './icons/weather/sunset.svg';
+import dataSet from './data';
 
-function newData(name, icon) {
+function newData(obj) {
   const div = document.createElement('div');
   div.classList.add('data');
   const value = document.createElement('p');
@@ -13,10 +8,10 @@ function newData(name, icon) {
   const legend = document.createElement('div');
   legend.classList.add('description');
   const desc = document.createElement('p');
-  desc.textContent = name;
+  desc.textContent = obj.name;
   const image = document.createElement('img');
-  image.setAttribute('alt', name);
-  image.src = icon;
+  image.setAttribute('alt', obj.name);
+  image.src = obj.icon;
   legend.append(image, desc);
 
   div.append(legend, value);
@@ -38,10 +33,6 @@ const currentWeather = (() => {
   const weatherInfo = document.createElement('div');
   weatherInfo.classList.add('weather-info');
 
-  // const temperature = document.createElement('div');
-  // temperature.classList.add('temperature');
-  // const temperatureIcon = document.createElement('img');
-  // temperatureIcon.src = TEMP_ICON;
   const temperatureValue = document.createElement('p');
   temperatureValue.textContent = '21';
   temperatureValue.classList.add('temperature');
@@ -49,7 +40,6 @@ const currentWeather = (() => {
   spanSmall.classList.add('small');
   spanSmall.textContent = '°C';
   temperatureValue.append(spanSmall);
-  // temperature.append(temperatureValue, temperatureUnit);
 
   const weatherCondition = document.createElement('div');
   weatherCondition.classList.add('weather-condition');
@@ -61,13 +51,13 @@ const currentWeather = (() => {
 
   const weatherExtra = document.createElement('div');
   weatherExtra.classList.add('extra');
-  const feelsLike = newData('Feels like', FEELS_LIKE);
-  const windSpeed = newData('Wind speed', WIND_SPEED);
-  const cloudiness = newData('Cloudiness', CLOUDINESS);
-  const humidity = newData('Wind speed', HUMIDITY);
-  const sunrise = newData('Sunrise', SUNRISE);
-  const sunset = newData('Sunset', SUNSET);
-  weatherExtra.append(sunrise, sunset, feelsLike, humidity, windSpeed, cloudiness);
+  const feelsLike = newData(dataSet.feelsLike);
+  const windSpeed = newData(dataSet.windSpeed);
+  const cloudiness = newData(dataSet.cloudiness);
+  const humidity = newData(dataSet.humidity);
+  const visibility = newData(dataSet.visibility);
+  const uvIndex = newData(dataSet.uvIndex);
+  weatherExtra.append(feelsLike, humidity, windSpeed, cloudiness, visibility, uvIndex);
 
   weatherInfo.append(temperatureValue, weatherCondition, weatherExtra);
 

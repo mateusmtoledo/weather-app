@@ -1,3 +1,5 @@
+import addDateStrings from './dateFunctions';
+
 const API_KEY = 'b8bedc2110030101dd9c8d0c74f2336c';
 
 async function getCoordinates(locationName) {
@@ -23,6 +25,7 @@ async function getWeatherData(locationName) {
   const weatherData = await getData(obj);
   weatherData.city = obj.name;
   weatherData.country = obj.country;
+  addDateStrings(weatherData);
   return weatherData;
 }
 

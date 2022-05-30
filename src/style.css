@@ -2,6 +2,7 @@
 
 :root {
     font-size: 16px;
+    --cards-color: #222844;
 }
 
 *, *::before, *::after {
@@ -15,7 +16,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(to right bottom, #434656, #3b3e52, #32374d, #2a2f49, #222844);
+    background-image: linear-gradient(to right bottom, #3d4564, #424b70, #47507c, #4d5688, #545b94);
     color: #ffffff;
 }
 
@@ -28,7 +29,7 @@ h1 {
 }
 
 header {
-    padding: 16px 24px;
+    padding: 16px 24px 8px;
     display: flex;
     gap: 16px;
     justify-content: space-between;
@@ -82,21 +83,21 @@ header {
 }
 
 main {
-    padding: 32px;
+    padding: 64px;
     justify-content: center;
     flex: 1;
-    margin: auto;
     display: grid;
     grid-template-rows: 1fr 1fr;
+    grid-template-columns: 500px 1fr;
+    gap: 64px;
 }
 
 .current-weather {
-    min-width: 500px;
     padding: 32px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: #3D4564;
+    background: var(--cards-color);
     border-radius: 8px;
     grid-row: 1 / -1;
 }
@@ -133,7 +134,7 @@ main {
     font-size: 1rem;
 }
 
-.extra .data {
+.data {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,7 +146,7 @@ main {
     align-items: center;
 }
 
-.extra .data img {
+.data img {
     width: 32px;
 }
 
@@ -157,5 +158,72 @@ main {
 }
 
 .weather-condition img {
-    width: 96px;
+    width: 84px;
+}
+
+.card-container {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+}
+
+.card {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+    background-color: var(--cards-color);
+    border-radius: 16px;
+    justify-content: center;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+}
+
+.card,
+.card p {
+    font-size: 0.9rem;
+}
+
+.forecast {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card .data-container {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 16px;
+}
+
+.forecast h2 {
+    margin-bottom: 8px;
+}
+
+.card .condition-container {
+    width: 64px;
+    height: 32px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 16px;
+}
+
+.card .weather-condition img {
+    width: 64px;
+    object-fit: scale-down;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.forecast .temperature-maxmin {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
 }
