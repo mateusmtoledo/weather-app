@@ -13,7 +13,7 @@ const searchBar = (() => {
   searchLabel.append(searchIcon);
   const searchInput = document.createElement('input');
   searchInput.id = 'search-input';
-  searchInput.setAttribute('placeholder', 'Search');
+  searchInput.setAttribute('placeholder', 'City name');
   const searchButton = document.createElement('button');
   searchButton.classList.add('search-button');
   searchButton.textContent = 'Go!';
