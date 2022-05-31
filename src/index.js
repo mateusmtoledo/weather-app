@@ -1,5 +1,4 @@
 import './style.css';
-import header from './header';
-import mainSection from './mainSection';
+import pageLoad from './pageLoad';
 
-document.body.append(header, mainSection);
+pageLoad();
