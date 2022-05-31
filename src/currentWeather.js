@@ -1,22 +1,6 @@
 import dataSet from './data';
-
-function newData(obj) {
-  const div = document.createElement('div');
-  div.classList.add('data');
-  const value = document.createElement('p');
-  value.textContent = '--';
-  const legend = document.createElement('div');
-  legend.classList.add('description');
-  const desc = document.createElement('p');
-  desc.textContent = obj.name;
-  const image = document.createElement('img');
-  image.setAttribute('alt', obj.name);
-  image.src = obj.icon;
-  legend.append(image, desc);
-
-  div.append(legend, value);
-  return div;
-}
+import pubSub from './pubSub';
+import stringFunctions from './stringFunctions';
 
 const currentWeather = (() => {
   const container = document.createElement('div');
@@ -25,43 +9,80 @@ const currentWeather = (() => {
   cityInfo.classList.add('city-info');
   const cityName = document.createElement('p');
   cityName.classList.add('city-name');
-  cityName.textContent = 'London';
+  cityName.textContent = 'City';
   const localDate = document.createElement('p');
-  localDate.textContent = 'Wed, 25 May 2022, 19:43';
+  localDate.textContent = '--';
+  localDate.classList.add('date');
   cityInfo.append(cityName, localDate);
 
   const weatherInfo = document.createElement('div');
   weatherInfo.classList.add('weather-info');
 
-  const temperatureValue = document.createElement('p');
-  temperatureValue.textContent = '21';
-  temperatureValue.classList.add('temperature');
+  const temperature = document.createElement('p');
+  const temperatureValue = document.createElement('span');
+  temperatureValue.textContent = '--';
+  temperature.classList.add('temperature', 'value');
   const spanSmall = document.createElement('span');
   spanSmall.classList.add('small');
   spanSmall.textContent = '°C';
-  temperatureValue.append(spanSmall);
+  temperature.append(temperatureValue, spanSmall);
 
   const weatherCondition = document.createElement('div');
   weatherCondition.classList.add('weather-condition');
   const weatherIcon = document.createElement('img');
-  weatherIcon.src = 'http://openweathermap.org/img/wn/02d@2x.png';
+  weatherIcon.src = 'http://openweathermap.org/img/wn/01n@2x.png';
   const weatherDescription = document.createElement('p');
-  weatherDescription.textContent = 'Few clouds';
+  weatherDescription.textContent = '--';
   weatherCondition.append(weatherIcon, weatherDescription);
 
   const weatherExtra = document.createElement('div');
   weatherExtra.classList.add('extra');
-  const feelsLike = newData(dataSet.feelsLike);
-  const windSpeed = newData(dataSet.windSpeed);
-  const cloudiness = newData(dataSet.cloudiness);
-  const humidity = newData(dataSet.humidity);
-  const visibility = newData(dataSet.visibility);
-  const uvIndex = newData(dataSet.uvIndex);
-  weatherExtra.append(feelsLike, humidity, windSpeed, cloudiness, visibility, uvIndex);
 
-  weatherInfo.append(temperatureValue, weatherCondition, weatherExtra);
+  const addInfo = (obj) => {
+    const div = document.createElement('div');
+    div.classList.add('data', obj.varName);
+    const value = document.createElement('p');
+    value.classList.add('value');
+    value.textContent = '--';
+    const legend = document.createElement('div');
+    legend.classList.add('description');
+    const desc = document.createElement('p');
+    desc.textContent = obj.name;
+    const image = document.createElement('img');
+    image.setAttribute('alt', obj.name);
+    image.src = obj.icon;
+    legend.append(image, desc);
+    div.append(legend, value);
+    weatherExtra.append(div);
+  };
 
+  const dataArr = [
+    dataSet.feelsLike,
+    dataSet.windSpeed,
+    dataSet.cloudiness,
+    dataSet.humidity,
+    dataSet.visibility,
+    dataSet.uvIndex,
+  ];
+
+  dataArr.forEach((datum) => {
+    addInfo(datum);
+  });
+
+  weatherInfo.append(temperature, weatherCondition, weatherExtra);
   container.append(cityInfo, weatherInfo);
+
+  pubSub.subscribe('newData', (data) => {
+    cityName.textContent = data.city;
+    localDate.textContent = data.current.dt;
+    temperatureValue.textContent = Math.round(data.current.temp);
+    weatherIcon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+    weatherDescription.textContent = stringFunctions.capitalize(data
+      .current.weather[0].description);
+    dataArr.forEach((datum) => {
+      container.querySelector(`.data.${datum.varName} .value`).textContent = data.current[datum.varName] + datum.unit;
+    });
+  });
 
   return container;
 })();

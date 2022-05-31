@@ -88,8 +88,9 @@ main {
     flex: 1;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 500px 1fr;
-    gap: 64px;
+    grid-template-columns: 400px 1fr;
+    column-gap: 64px;
+    row-gap: 16px;
 }
 
 .current-weather {
@@ -194,9 +195,10 @@ main {
 }
 
 .card .data-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     justify-content: center;
-    gap: 48px;
+    row-gap: 16px;
     margin-top: 16px;
 }
 

@@ -6,23 +6,28 @@ import SUNRISE from './icons/weather/sunrise.svg';
 import SUNSET from './icons/weather/sunset.svg';
 import UV_INDEX from './icons/weather/uv-index.svg';
 import VISIBILITY from './icons/weather/visibility.svg';
+import RAIN_PROBABILITY from './icons/weather/rain-probability.svg';
 
-function factory(name, icon) {
+function factory(name, icon, varName, unit) {
   return {
     name,
     icon,
+    varName,
+    unit,
   };
 }
 
 const dataSet = {
-  feelsLike: factory('Feels like', THERMOMETER),
-  windSpeed: factory('Wind speed', WIND_SPEED),
-  cloudiness: factory('Cloudiness', CLOUDINESS),
-  humidity: factory('Humidity', HUMIDITY),
-  sunrise: factory('Sunrise', SUNRISE),
-  sunset: factory('Sunset', SUNSET),
-  uvIndex: factory('UV index', UV_INDEX),
-  visibility: factory('Visibility', VISIBILITY),
+  temperature: factory('Temperature', THERMOMETER, 'temp', '°C'),
+  rainProbability: factory('Rain', RAIN_PROBABILITY, 'pop', '%'),
+  feelsLike: factory('Feels like', THERMOMETER, 'feels_like', '°C'),
+  windSpeed: factory('Wind speed', WIND_SPEED, 'wind_speed', ' m/s'),
+  cloudiness: factory('Cloudiness', CLOUDINESS, 'clouds', '%'),
+  humidity: factory('Humidity', HUMIDITY, 'humidity', '%'),
+  sunrise: factory('Sunrise', SUNRISE, 'sunrise', ''),
+  sunset: factory('Sunset', SUNSET, 'sunset', ''),
+  uvIndex: factory('UV index', UV_INDEX, 'uvi', ''),
+  visibility: factory('Visibility', VISIBILITY, 'visibility', ' m'),
 };
 
 export default dataSet;

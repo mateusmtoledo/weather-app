@@ -1,4 +1,4 @@
-function convertCurrentDate(c, timezone, locale = 'en-US') {
+function convertCurrentDate(c, timezone, locale = 'en-UK') {
   const options = {
     timeZone: timezone,
     weekday: 'long',
@@ -12,7 +12,7 @@ function convertCurrentDate(c, timezone, locale = 'en-US') {
   current.dt = new Date(current.dt * 1000).toLocaleString(locale, options);
 }
 
-function convertDailyDates(daily, timezone, locale = 'en-US') {
+function convertDailyDates(daily, timezone, locale = 'en-UK') {
   const dtOptions = {
     timeZone: timezone,
     weekday: 'long',
@@ -34,7 +34,7 @@ function convertDailyDates(daily, timezone, locale = 'en-US') {
   });
 }
 
-function convertHourlyAndMinutelyDates(obj, timezone, locale = 'en-US') {
+function convertHourlyAndMinutelyDates(obj, timezone, locale = 'en-UK') {
   const options = {
     timeZone: timezone,
     hour: '2-digit',

@@ -1,5 +1,6 @@
 import SEARCH_ICON from './icons/search.svg';
 import getWeatherData from './apiHandler';
+import pubSub from './pubSub';
 
 const searchBar = (() => {
   const container = document.createElement('div');
@@ -18,7 +19,8 @@ const searchBar = (() => {
   searchButton.textContent = 'Go!';
   searchButton.addEventListener('click', async () => {
     if (!searchInput.value) return;
-    console.log(await getWeatherData(searchInput.value));
+    const weatherData = await getWeatherData(searchInput.value);
+    pubSub.publish('newData', weatherData);
   });
   container.append(searchLabel, searchInput, searchButton);
   return container;

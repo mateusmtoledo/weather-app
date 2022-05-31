@@ -1,5 +1,6 @@
 import dataSet from './data';
 import Card from './cards';
+import pubSub from './pubSub';
 
 function forecastElementFactory(name) {
   const container = document.createElement('div');
@@ -13,27 +14,33 @@ function forecastElementFactory(name) {
 }
 
 class Forecast {
-  constructor(name, obj, ...datum) {
+  constructor(name, ...datum) {
     this.name = name;
-    this.data = obj;
     this.domNode = forecastElementFactory(name);
     this.dataArr = [...datum];
     this.cards = [];
+    pubSub.subscribe('newData', this.updateCards.bind(this));
     this.init();
   }
 
   init() {
     for (let i = 0; i < 4; i += 1) {
-      this.cards[i] = new Card(i.toString(), this.name);
+      this.cards[i] = new Card('Title', this.name);
       for (let j = 0; j < this.dataArr.length; j += 1) {
         this.cards[i].addInfo(this.dataArr[j]);
       }
       this.domNode.querySelector('.card-container').append(this.cards[i].domNode);
     }
   }
+
+  updateCards(data) {
+    this.cards.forEach((card, index) => {
+      card.updateData(data[this.name.toLowerCase()][index], this.dataArr);
+    });
+  }
 }
 
-// const daily = new Forecast('Daily', .daily, dataSet.sunrise, dataSet.sunset);
-// const hourly = new Forecast('Hourly', .hourly, dataSet.cloudiness, dataSet.humidity);
+const daily = new Forecast('Daily', dataSet.sunrise, dataSet.sunset);
+const hourly = new Forecast('Hourly', dataSet.temperature, dataSet.rainProbability, dataSet.cloudiness, dataSet.humidity);
 
-// export default { daily, hourly };
+export default { daily, hourly };
