@@ -3,7 +3,7 @@ import prepareDataObject from './dataStuff';
 const API_KEY = 'b8bedc2110030101dd9c8d0c74f2336c';
 
 async function getCoordinates(locationName) {
-  const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=1&appid=${API_KEY}`);
+  const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=1&appid=${API_KEY}`);
   const json = await response.json();
   const obj = {
     name: json[0].name,
