@@ -19,12 +19,24 @@ class Forecast {
     this.domNode = forecastElementFactory(name);
     this.dataArr = [...datum];
     this.cards = [];
+    this.numberOfCards = (() => {
+      switch (this.name) {
+        case 'Daily':
+          return 8;
+        case 'Hourly':
+          return 48;
+        case 'Minutely':
+          return 61;
+        default:
+          return 4;
+      }
+    })();
     pubSub.subscribe('newData', this.updateCards.bind(this));
     this.init();
   }
 
   init() {
-    for (let i = 0; i < 4; i += 1) {
+    for (let i = 0; i < this.numberOfCards; i += 1) {
       this.cards[i] = new Card('Title', this.name);
       for (let j = 0; j < this.dataArr.length; j += 1) {
         this.cards[i].addInfo(this.dataArr[j]);
@@ -34,8 +46,9 @@ class Forecast {
   }
 
   updateCards(data) {
+    const thisData = data[this.name.toLowerCase()];
     this.cards.forEach((card, index) => {
-      card.updateData(data[this.name.toLowerCase()][index], this.dataArr);
+      card.updateData(thisData[index], this.dataArr);
     });
   }
 }
