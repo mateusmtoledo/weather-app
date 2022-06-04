@@ -29,11 +29,14 @@ const currentWeather = (() => {
 
   const weatherCondition = document.createElement('div');
   weatherCondition.classList.add('weather-condition');
+  const iconContainer = document.createElement('div');
   const weatherIcon = document.createElement('img');
   weatherIcon.src = 'http://openweathermap.org/img/wn/01n@2x.png';
+  iconContainer.append(weatherIcon);
+  iconContainer.classList.add('icon-container');
   const weatherDescription = document.createElement('p');
   weatherDescription.textContent = '--';
-  weatherCondition.append(weatherIcon, weatherDescription);
+  weatherCondition.append(iconContainer, weatherDescription);
 
   const weatherExtra = document.createElement('div');
   weatherExtra.classList.add('extra');

@@ -83,16 +83,16 @@ header {
 }
 
 main {
-    padding: 32px 64px;
+    padding: 0.75vw 3vw 1.5vw;
     justify-content: center;
     flex: 1 0 auto;
     display: flex;
-    gap: 64px;
+    gap: 3vw;
     width: 100vw;
 }
 
 .current-weather {
-    padding: 32px;
+    padding: 1.5vw;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -110,13 +110,10 @@ main {
     color: #6FFACC;
 }
 
-.weather-info {
-    margin-top: 24px;
-}
-
 .weather-info .temperature {
     font-size: 4rem;
     text-align: center;
+    margin-top: 1.2vw;
 }
 
 .weather-info .temperature .small {
@@ -126,12 +123,12 @@ main {
 }
 
 .extra {
-    margin-top: 24px;
+    margin-top: 1.5vw;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     justify-items: center;
     font-size: 1rem;
-    gap: 32px;
+    gap: 1vw;
 }
 
 .data {
@@ -157,8 +154,20 @@ main {
     align-items: center;
 }
 
+.weather-condition .icon-container {
+    width: 64px;
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+}
+
 .weather-condition img {
     width: 84px;
+    object-fit: scale-down;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .card-container {
@@ -178,6 +187,7 @@ main {
     background-color: var(--cards-color);
     border-radius: 16px;
     justify-content: center;
+    margin-bottom: 8px;
 }
 
 .card h3 {
@@ -211,16 +221,11 @@ main {
     margin-top: 16px;
 }
 
-.forecast h2 {
-    margin-bottom: 8px;
-}
-
 .card .condition-container {
     width: 64px;
     height: 32px;
     overflow: hidden;
     position: relative;
-    margin-top: 16px;
 }
 
 .card .weather-condition img {
@@ -251,3 +256,9 @@ main {
     background: #6FFACC;
     border-radius: 32px;
 }
+/* 
+@media only screen and (max-width: 1280px) {
+    body {
+      background-color: lightblue;
+    }
+} */
