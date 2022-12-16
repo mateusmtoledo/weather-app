@@ -80,10 +80,12 @@ const currentWeather = (() => {
     localDate.textContent = data.current.dt;
     temperatureValue.textContent = Math.round(data.current.temp);
     weatherIcon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
-    weatherDescription.textContent = stringFunctions.capitalize(data
-      .current.weather[0].description);
+    weatherDescription.textContent = stringFunctions.capitalize(
+      data.current.weather[0].description
+    );
     dataArr.forEach((datum) => {
-      container.querySelector(`.data.${datum.varName} .value`).textContent = data.current[datum.varName] + datum.unit;
+      container.querySelector(`.data.${datum.varName} .value`).textContent =
+        data.current[datum.varName] + datum.unit;
     });
   });
 

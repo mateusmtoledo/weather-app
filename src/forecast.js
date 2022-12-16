@@ -41,7 +41,9 @@ class Forecast {
       for (let j = 0; j < this.dataArr.length; j += 1) {
         this.cards[i].addInfo(this.dataArr[j]);
       }
-      this.domNode.querySelector('.card-container').append(this.cards[i].domNode);
+      this.domNode
+        .querySelector('.card-container')
+        .append(this.cards[i].domNode);
     }
   }
 
@@ -54,6 +56,12 @@ class Forecast {
 }
 
 const daily = new Forecast('Daily', dataSet.sunrise, dataSet.sunset);
-const hourly = new Forecast('Hourly', dataSet.temperature, dataSet.rainProbability, dataSet.cloudiness, dataSet.humidity);
+const hourly = new Forecast(
+  'Hourly',
+  dataSet.temperature,
+  dataSet.rainProbability,
+  dataSet.cloudiness,
+  dataSet.humidity
+);
 
 export default { daily, hourly };

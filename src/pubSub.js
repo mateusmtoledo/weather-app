@@ -14,7 +14,8 @@ function publish(eventName, data) {
 }
 
 function unsubscribe(eventName, f) {
-  if (events[eventName].includes(f)) events[eventName].splice(events[eventName].indexOf(f));
+  if (events[eventName].includes(f))
+    events[eventName].splice(events[eventName].indexOf(f));
 }
 
 export default { subscribe, publish, unsubscribe };

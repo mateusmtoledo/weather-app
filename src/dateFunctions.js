@@ -24,7 +24,10 @@ function convertDailyDates(daily, timezone, locale = 'en-UK') {
   };
   daily.forEach((d, index) => {
     const day = d;
-    day.sunrise = new Date(day.sunrise * 1000).toLocaleString(locale, sunOptions);
+    day.sunrise = new Date(day.sunrise * 1000).toLocaleString(
+      locale,
+      sunOptions
+    );
     day.sunset = new Date(day.sunset * 1000).toLocaleString(locale, sunOptions);
     if (index === 0) {
       day.dt = 'Today';

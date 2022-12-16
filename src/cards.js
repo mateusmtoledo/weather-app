@@ -70,8 +70,12 @@ class Card {
   constructor(title, type) {
     this.domNode = cardDomNodeFactory(title, type);
     this.title = this.domNode.querySelector('.title');
-    this.weatherConditionImg = this.domNode.querySelector('.weather-condition img');
-    this.weatherConditionDesc = this.domNode.querySelector('.weather-condition p');
+    this.weatherConditionImg = this.domNode.querySelector(
+      '.weather-condition img'
+    );
+    this.weatherConditionDesc = this.domNode.querySelector(
+      '.weather-condition p'
+    );
   }
 
   addInfo(infoObj) {
@@ -95,13 +99,20 @@ class Card {
   updateData(data, dataArr) {
     this.title.textContent = data.dt;
     this.weatherConditionImg.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-    this.weatherConditionDesc.textContent = stringFunctions.capitalize(data.weather[0].description);
+    this.weatherConditionDesc.textContent = stringFunctions.capitalize(
+      data.weather[0].description
+    );
     if (this.domNode.querySelector('.temperature-maxmin')) {
-      this.domNode.querySelector('.max .value').textContent = Math.round(data.temp.max);
-      this.domNode.querySelector('.min .value').textContent = Math.round(data.temp.min);
+      this.domNode.querySelector('.max .value').textContent = Math.round(
+        data.temp.max
+      );
+      this.domNode.querySelector('.min .value').textContent = Math.round(
+        data.temp.min
+      );
     }
     dataArr.forEach((datum) => {
-      this.domNode.querySelector(`.data.${datum.varName} .value`).textContent = data[datum.varName] + datum.unit;
+      this.domNode.querySelector(`.data.${datum.varName} .value`).textContent =
+        data[datum.varName] + datum.unit;
     });
   }
 }
