@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -5,9 +6,18 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'inline-source-map',
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
+  devServer: {
+    static: './dist',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Weather app',
+    }),
+  ],
   module: {
     rules: [
       {
@@ -23,5 +33,8 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };
