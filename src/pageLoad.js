@@ -1,11 +1,11 @@
 import header from './header';
 import mainSection from './mainSection';
 import pubSub from './pubSub';
-import getWeatherData from './apiHandler';
+import Api from './Api';
 
 async function pageLoad() {
   document.body.append(header, mainSection);
-  const weatherData = await getWeatherData('london');
+  const weatherData = await Api.getWeatherByLocationName('london');
   pubSub.publish('newData', weatherData);
 }
 

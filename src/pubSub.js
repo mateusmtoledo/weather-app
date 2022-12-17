@@ -1,21 +1,27 @@
-const events = {};
+class PubSub {
+  constructor() {
+    this.events = {};
+  }
 
-function subscribe(eventName, f) {
-  if (!events[eventName]) events[eventName] = [];
-  events[eventName].push(f);
-}
+  subscribe(eventName, f) {
+    if (!this.events[eventName]) this.events[eventName] = [];
+    this.events[eventName].push(f);
+  }
 
-function publish(eventName, data) {
-  if (events[eventName]) {
-    events[eventName].forEach((f) => {
-      f(data);
-    });
+  publish(eventName, data) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach((f) => {
+        f(data);
+      });
+    }
+  }
+
+  unsubscribe(eventName, f) {
+    if (this[eventName].includes(f))
+      this[eventName].splice(this[eventName].indexOf(f));
   }
 }
 
-function unsubscribe(eventName, f) {
-  if (events[eventName].includes(f))
-    events[eventName].splice(events[eventName].indexOf(f));
-}
+const pubSub = new PubSub();
 
-export default { subscribe, publish, unsubscribe };
+export default pubSub;

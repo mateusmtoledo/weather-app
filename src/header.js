@@ -1,5 +1,5 @@
 import SEARCH_ICON from './icons/search.svg';
-import getWeatherData from './apiHandler';
+import Api from './Api';
 import pubSub from './pubSub';
 import DOMUtils from './utils/DOMUtils';
 
@@ -28,7 +28,7 @@ const searchBar = (() => {
   );
   searchButton.addEventListener('click', async () => {
     if (!searchInput.value) return;
-    const weatherData = await getWeatherData(searchInput.value);
+    const weatherData = await Api.getWeatherByLocationName(searchInput.value);
     pubSub.publish('newData', weatherData);
   });
 

@@ -1,4 +1,4 @@
-import stringFunctions from './stringFunctions';
+import StringUtils from './utils/StringUtils';
 import DOMUtils from './utils/DOMUtils';
 
 function minMaxGenerator() {
@@ -152,7 +152,7 @@ class Card {
   updateData(data, dataArr) {
     this.title.textContent = data.dt;
     this.weatherConditionImg.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-    this.weatherConditionDesc.textContent = stringFunctions.capitalize(
+    this.weatherConditionDesc.textContent = StringUtils.capitalize(
       data.weather[0].description
     );
     if (this.domNode.querySelector('.temperature-maxmin')) {

@@ -1,6 +1,6 @@
 import dataSet from './data';
 import pubSub from './pubSub';
-import stringFunctions from './stringFunctions';
+import StringUtils from './utils/StringUtils';
 import DOMUtils from './utils/DOMUtils';
 
 const currentWeather = (() => {
@@ -139,7 +139,7 @@ const currentWeather = (() => {
     localDate.textContent = data.current.dt;
     temperatureValue.textContent = Math.round(data.current.temp);
     weatherIcon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
-    weatherDescription.textContent = stringFunctions.capitalize(
+    weatherDescription.textContent = StringUtils.capitalize(
       data.current.weather[0].description
     );
     dataArr.forEach((datum) => {
