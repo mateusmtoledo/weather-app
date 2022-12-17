@@ -1,16 +1,21 @@
 import dataSet from './data';
 import Card from './cards';
 import pubSub from './pubSub';
+import DOMUtils from './utils/DOMUtils';
 
 function forecastElementFactory(name) {
-  const container = document.createElement('div');
-  container.classList.add('forecast');
-  const h2 = document.createElement('h2');
-  h2.textContent = name;
-  const dataContainer = document.createElement('div');
-  dataContainer.classList.add('card-container');
-  container.append(h2, dataContainer);
-  return container;
+  const h2 = DOMUtils.createElement('h2', {}, name);
+  const dataContainer = DOMUtils.createElement('div', {
+    class: 'card-container',
+  });
+  return DOMUtils.createElement(
+    'div',
+    {
+      class: 'forecast',
+    },
+    h2,
+    dataContainer
+  );
 }
 
 class Forecast {

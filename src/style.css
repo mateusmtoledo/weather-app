@@ -173,6 +173,7 @@ main {
 .weather-condition img {
   width: 84px;
   object-fit: scale-down;
+  /* FIXME probably unecessary use of position: absolute */
   position: absolute;
   left: 50%;
   top: 50%;
@@ -265,9 +266,3 @@ main {
   background: #6ffacc;
   border-radius: 32px;
 }
-/* 
-@media only screen and (max-width: 1280px) {
-    body {
-      background-color: lightblue;
-    }
-} */

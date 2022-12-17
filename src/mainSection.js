@@ -1,14 +1,22 @@
 import currentWeather from './currentWeather';
 import forecast from './forecast';
-
-const forecastContainer = document.createElement('div');
-forecastContainer.classList.add('forecast-container');
+import DOMUtils from './utils/DOMUtils';
 
 const mainSection = (() => {
-  const main = document.createElement('main');
-  main.append(currentWeather);
-  main.append(forecastContainer);
-  forecastContainer.append(forecast.daily.domNode, forecast.hourly.domNode);
+  const forecastContainer = DOMUtils.createElement(
+    'div',
+    {
+      class: 'forecast-container',
+    },
+    forecast.daily.domNode,
+    forecast.hourly.domNode
+  );
+  const main = DOMUtils.createElement(
+    'main',
+    {},
+    currentWeather,
+    forecastContainer
+  );
   return main;
 })();
 

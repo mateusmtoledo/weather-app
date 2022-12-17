@@ -1,62 +1,124 @@
 import dataSet from './data';
 import pubSub from './pubSub';
 import stringFunctions from './stringFunctions';
+import DOMUtils from './utils/DOMUtils';
 
 const currentWeather = (() => {
-  const container = document.createElement('div');
-  container.classList.add('current-weather');
-  const cityInfo = document.createElement('div');
-  cityInfo.classList.add('city-info');
-  const cityName = document.createElement('p');
-  cityName.classList.add('city-name');
-  cityName.textContent = 'City';
-  const localDate = document.createElement('p');
-  localDate.textContent = '--';
-  localDate.classList.add('date');
-  cityInfo.append(cityName, localDate);
+  const cityName = DOMUtils.createElement(
+    'p',
+    {
+      class: 'city-name',
+    },
+    'City'
+  );
+  const localDate = DOMUtils.createElement(
+    'p',
+    {
+      class: 'date',
+    },
+    '--'
+  );
+  const cityInfo = DOMUtils.createElement(
+    'div',
+    {
+      class: 'city-info',
+    },
+    cityName,
+    localDate
+  );
 
-  const weatherInfo = document.createElement('div');
-  weatherInfo.classList.add('weather-info');
+  const temperatureValue = DOMUtils.createElement('span', {}, '--'); // FIXME element might not be needed
+  const spanSmall = DOMUtils.createElement(
+    'span',
+    {
+      class: 'small',
+    },
+    '°C'
+  );
+  const temperature = DOMUtils.createElement(
+    'p',
+    {
+      class: 'temperature value',
+    },
+    temperatureValue,
+    spanSmall
+  );
 
-  const temperature = document.createElement('p');
-  const temperatureValue = document.createElement('span');
-  temperatureValue.textContent = '--';
-  temperature.classList.add('temperature', 'value');
-  const spanSmall = document.createElement('span');
-  spanSmall.classList.add('small');
-  spanSmall.textContent = '°C';
-  temperature.append(temperatureValue, spanSmall);
+  const weatherIcon = DOMUtils.createElement('img', {
+    src: 'https://openweathermap.org/img/wn/01n@2x.png',
+  });
+  const iconContainer = DOMUtils.createElement(
+    'div',
+    {
+      class: 'icon-container', // FIXME element might not be needed
+    },
+    weatherIcon
+  );
+  const weatherDescription = DOMUtils.createElement('p', {}, '--');
+  const weatherCondition = DOMUtils.createElement(
+    'div',
+    {
+      class: 'weather-condition',
+    },
+    iconContainer,
+    weatherDescription
+  );
 
-  const weatherCondition = document.createElement('div');
-  weatherCondition.classList.add('weather-condition');
-  const iconContainer = document.createElement('div');
-  const weatherIcon = document.createElement('img');
-  weatherIcon.src = 'https://openweathermap.org/img/wn/01n@2x.png';
-  iconContainer.append(weatherIcon);
-  iconContainer.classList.add('icon-container');
-  const weatherDescription = document.createElement('p');
-  weatherDescription.textContent = '--';
-  weatherCondition.append(iconContainer, weatherDescription);
+  const weatherExtra = DOMUtils.createElement('div', {
+    class: 'extra',
+  }); // TODO naming
 
-  const weatherExtra = document.createElement('div');
-  weatherExtra.classList.add('extra');
+  const weatherInfo = DOMUtils.createElement(
+    'div',
+    {
+      class: 'weather-info',
+    },
+    temperature,
+    weatherCondition,
+    weatherExtra
+  );
+
+  const container = DOMUtils.createElement(
+    'div',
+    {
+      class: 'current-weather',
+    },
+    cityInfo,
+    weatherInfo
+  );
 
   const addInfo = (obj) => {
-    const div = document.createElement('div');
-    div.classList.add('data', obj.varName);
-    const value = document.createElement('p');
-    value.classList.add('value');
-    value.textContent = '--';
-    const legend = document.createElement('div');
-    legend.classList.add('description');
-    const desc = document.createElement('p');
-    desc.textContent = obj.name;
-    const image = document.createElement('img');
-    image.setAttribute('alt', obj.name);
-    image.src = obj.icon;
-    legend.append(image, desc);
-    div.append(legend, value);
-    weatherExtra.append(div);
+    const value = DOMUtils.createElement(
+      'p',
+      {
+        class: 'value',
+      },
+      '--'
+    );
+    const desc = DOMUtils.createElement('p', {}, obj.name);
+    const image = DOMUtils.createElement('img', {
+      alt: obj.name,
+      src: obj.icon,
+    });
+    const legend = DOMUtils.createElement(
+      'div',
+      {
+        class: 'description',
+      },
+      image,
+      desc
+    );
+
+    weatherExtra.append(
+      DOMUtils.createElement(
+        'div',
+        {
+          class: `data ${obj.varName}`,
+        },
+        legend,
+        value
+      )
+    );
   };
 
   const dataArr = [
@@ -71,9 +133,6 @@ const currentWeather = (() => {
   dataArr.forEach((datum) => {
     addInfo(datum);
   });
-
-  weatherInfo.append(temperature, weatherCondition, weatherExtra);
-  container.append(cityInfo, weatherInfo);
 
   pubSub.subscribe('newData', (data) => {
     cityName.textContent = data.city;
@@ -90,6 +149,6 @@ const currentWeather = (() => {
   });
 
   return container;
-})();
+})(); // TODO use class
 
 export default currentWeather;

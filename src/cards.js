@@ -1,68 +1,107 @@
 import stringFunctions from './stringFunctions';
+import DOMUtils from './utils/DOMUtils';
+
+function minMaxGenerator() {
+  const maxValue = DOMUtils.createElement(
+    'span',
+    {
+      class: 'value',
+    },
+    '--'
+  );
+  const maxUnit = DOMUtils.createElement(
+    'span',
+    {
+      class: 'unit',
+    },
+    '°C'
+  );
+  const max = DOMUtils.createElement('p', {}, maxValue, maxUnit);
+  const maxText = DOMUtils.createElement('p', {}, 'MAX');
+  const maxDiv = DOMUtils.createElement(
+    'div',
+    {
+      class: 'max', // TODO naming
+    },
+    max,
+    maxText
+  );
+
+  const minValue = DOMUtils.createElement(
+    'span',
+    {
+      class: 'value',
+    },
+    '--'
+  );
+  const minUnit = DOMUtils.createElement(
+    'span',
+    {
+      class: 'unit',
+    },
+    '°C'
+  );
+  const min = DOMUtils.createElement('p', {}, minValue, minUnit);
+  const minText = DOMUtils.createElement('p', {}, 'MIN');
+  const minDiv = DOMUtils.createElement(
+    'div',
+    {
+      class: 'min',
+    },
+    min,
+    minText
+  );
+
+  return DOMUtils.createElement(
+    'div',
+    {
+      class: 'temperature-maxmin', // TODO naming
+    },
+    maxDiv,
+    minDiv
+  );
+}
 
 function cardDomNodeFactory(title, type) {
-  const card = document.createElement('div');
-  card.classList.add('card');
-  const h3 = document.createElement('h3');
-  h3.textContent = title;
-  h3.classList.add('title');
-  const dataContainer = document.createElement('div');
-  dataContainer.classList.add('data-container');
-  const weatherCondition = document.createElement('div');
-  weatherCondition.classList.add('weather-condition');
-  const iconContainer = document.createElement('div');
-  iconContainer.classList.add('condition-container');
-  const weatherIcon = document.createElement('img');
-  weatherIcon.src = 'https://openweathermap.org/img/wn/01n@2x.png';
-  iconContainer.append(weatherIcon);
-  const weatherDescription = document.createElement('p');
-  weatherDescription.textContent = '--';
-  weatherCondition.append(iconContainer, weatherDescription);
-  if (type === 'Daily') {
-    const maxMin = document.createElement('div');
-    maxMin.classList.add('temperature-maxmin');
+  const h3 = DOMUtils.createElement(
+    'h3',
+    {
+      class: 'title', // TODO naming
+    },
+    title
+  );
+  const dataContainer = DOMUtils.createElement('div', {
+    class: 'data-container', // TODO naming
+  });
+  const weatherIcon = DOMUtils.createElement('img', {
+    src: 'https://openweathermap.org/img/wn/01n@2x.png',
+  });
+  const conditionContainer = DOMUtils.createElement(
+    'div',
+    {
+      class: 'condition-container', // FIXME probably unecessary element
+    },
+    weatherIcon
+  );
+  const weatherDescription = DOMUtils.createElement('p', {}, '--');
+  const weatherCondition = DOMUtils.createElement(
+    'div',
+    {
+      class: 'weather-condition',
+    },
+    conditionContainer,
+    weatherDescription
+  );
 
-    const maxDiv = document.createElement('div');
-    maxDiv.classList.add('max');
-
-    const max = document.createElement('p');
-
-    const maxValue = document.createElement('span');
-    maxValue.textContent = '--';
-    maxValue.classList.add('value');
-
-    const maxUnit = document.createElement('span');
-    maxUnit.classList.add('unit');
-    maxUnit.textContent = '°C';
-    max.append(maxValue, maxUnit);
-
-    const maxText = document.createElement('p');
-    maxText.textContent = 'MAX';
-
-    maxDiv.append(max, maxText);
-    const minDiv = document.createElement('div');
-    minDiv.classList.add('min');
-
-    const min = document.createElement('p');
-
-    const minValue = document.createElement('span');
-    minValue.textContent = '--';
-    minValue.classList.add('value');
-
-    const minUnit = document.createElement('span');
-    minUnit.classList.add('unit');
-    minUnit.textContent = '°C';
-    min.append(minValue, minUnit);
-
-    const minText = document.createElement('p');
-    minText.textContent = 'MIN';
-
-    minDiv.append(min, minText);
-
-    maxMin.append(maxDiv, minDiv);
-
-    card.append(h3, weatherCondition, maxMin, dataContainer);
-  } else card.append(h3, weatherCondition, dataContainer);
+  const cardChildren = [h3, weatherCondition, dataContainer];
+  if (type === 'Daily') cardChildren.splice(2, 0, minMaxGenerator());
+  const card = DOMUtils.createElement(
+    'div',
+    {
+      class: 'card',
+    },
+    ...cardChildren
+  );
   return card;
 }
 
@@ -79,21 +118,35 @@ class Card {
   }
 
   addInfo(infoObj) {
-    const div = document.createElement('div');
-    div.classList.add('data', infoObj.varName);
-    const value = document.createElement('p');
-    value.classList.add('value');
-    value.textContent = '--';
-    const legend = document.createElement('div');
-    legend.classList.add('description');
-    const desc = document.createElement('p');
-    desc.textContent = infoObj.name;
-    const image = document.createElement('img');
-    image.setAttribute('alt', infoObj.name);
-    image.src = infoObj.icon;
-    legend.append(image, desc);
-    div.append(legend, value);
-    this.domNode.querySelector('.data-container').append(div);
+    const value = DOMUtils.createElement(
+      'p',
+      {
+        class: 'value',
+      },
+      '--'
+    );
+    const desc = DOMUtils.createElement('p', {}, infoObj.name); // TODO naming
+    const image = DOMUtils.createElement('img', {
+      alt: infoObj.name,
+      src: infoObj.icon,
+    });
+    const legend = DOMUtils.createElement(
+      'div',
+      {
+        class: 'description',
+      },
+      image,
+      desc
+    );
+    const container = DOMUtils.createElement(
+      'div',
+      {
+        class: `data ${infoObj.varName}`,
+      },
+      legend,
+      value
+    );
+    this.domNode.querySelector('.data-container').appendChild(container);
   }
 
   updateData(data, dataArr) {
