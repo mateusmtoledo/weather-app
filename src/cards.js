@@ -1,6 +1,7 @@
 import StringUtils from './utils/StringUtils';
 import DOMUtils from './utils/DOMUtils';
 
+// TODO review
 function minMaxGenerator() {
   const maxValue = DOMUtils.createElement(
     'span',
@@ -107,12 +108,12 @@ function cardDomNodeFactory(title, type) {
 
 class Card {
   constructor(title, type) {
-    this.domNode = cardDomNodeFactory(title, type);
-    this.title = this.domNode.querySelector('.title');
-    this.weatherConditionImg = this.domNode.querySelector(
+    this.element = cardDomNodeFactory(title, type);
+    this.title = this.element.querySelector('.title');
+    this.weatherConditionImg = this.element.querySelector(
       '.weather-condition img'
     );
-    this.weatherConditionDesc = this.domNode.querySelector(
+    this.weatherConditionDesc = this.element.querySelector(
       '.weather-condition p'
     );
   }
@@ -146,7 +147,7 @@ class Card {
       legend,
       value
     );
-    this.domNode.querySelector('.data-container').appendChild(container);
+    this.element.querySelector('.data-container').appendChild(container);
   }
 
   updateData(data, dataArr) {
@@ -155,16 +156,16 @@ class Card {
     this.weatherConditionDesc.textContent = StringUtils.capitalize(
       data.weather[0].description
     );
-    if (this.domNode.querySelector('.temperature-maxmin')) {
-      this.domNode.querySelector('.max .value').textContent = Math.round(
+    if (this.element.querySelector('.temperature-maxmin')) {
+      this.element.querySelector('.max .value').textContent = Math.round(
         data.temp.max
       );
-      this.domNode.querySelector('.min .value').textContent = Math.round(
+      this.element.querySelector('.min .value').textContent = Math.round(
         data.temp.min
       );
     }
     dataArr.forEach((datum) => {
-      this.domNode.querySelector(`.data.${datum.varName} .value`).textContent =
+      this.element.querySelector(`.data.${datum.varName} .value`).textContent =
         data[datum.varName] + datum.unit;
     });
   }

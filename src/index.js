@@ -1,5 +1,5 @@
 import Api from './Api';
-import App from './components/App';
+import App from './App';
 import './style.css';
 
 const app = new App();
