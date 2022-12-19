@@ -41,11 +41,11 @@ const searchBar = (() => {
     searchInput,
     searchButton
   );
-})();
+})(); // TODO class
 
 const header = (() => {
   const h1 = DOMUtils.createElement('h1', {}, 'weather app');
   return DOMUtils.createElement('header', {}, h1, searchBar);
-})();
+})(); // TODO class
 
 export default header;

@@ -1,3 +1,4 @@
+import pubSub from './pubSub';
 import Weather from './Weather';
 
 const API_KEY = 'b8bedc2110030101dd9c8d0c74f2336c';
@@ -30,6 +31,7 @@ export default class Api {
     const weatherData = await Api.getWeatherByCoordinates(locationData);
     weatherData.city = locationData.name;
     weatherData.country = locationData.country;
-    return new Weather(weatherData).getNormalizedData();
+    const weather = new Weather(weatherData).getNormalizedData();
+    pubSub.publish('newData', weather);
   }
 }
