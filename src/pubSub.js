@@ -17,8 +17,8 @@ class PubSub {
   }
 
   unsubscribe(eventName, f) {
-    if (this[eventName].includes(f))
-      this[eventName].splice(this[eventName].indexOf(f));
+    if (this.events[eventName].includes(f))
+      this.events[eventName].splice(this.events[eventName].indexOf(f));
   }
 }
 

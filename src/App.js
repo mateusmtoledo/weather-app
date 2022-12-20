@@ -1,4 +1,4 @@
-import Main from './components/Main/Main';
+import Main from './layout/Main';
 import DOMUtils from './utils/DOMUtils';
 import Header from './components/Header/Header';
 

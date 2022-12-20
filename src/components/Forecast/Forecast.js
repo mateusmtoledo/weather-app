@@ -1,4 +1,4 @@
-import Card from '../../cards';
+import Card from '../ForecastCard/ForecastCard';
 import pubSub from '../../pubSub';
 import DOMUtils from '../../utils/DOMUtils';
 
@@ -42,7 +42,7 @@ export default class Forecast {
   updateCards(data) {
     const thisData = data[this.title.toLowerCase()];
     this.cards.forEach((card, index) => {
-      card.updateData(thisData[index], this.dataToDisplay);
+      card.update(thisData[index], this.dataToDisplay);
     });
   }
 }

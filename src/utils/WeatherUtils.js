@@ -1,6 +1,6 @@
-import DateUtils from './utils/DateUtils';
+import DateUtils from './DateUtils';
 
-export default class Weather {
+export default class WeatherUtils {
   constructor(weatherData) {
     this.data = weatherData;
     this.dateOptions = DateUtils.getDateOptions(this.data.timezone);
@@ -8,7 +8,7 @@ export default class Weather {
 
   normalizeObject(obj, type) {
     const { getDateString } = DateUtils;
-    const { replaceIfNotUndefined } = Weather;
+    const { replaceIfNotUndefined } = WeatherUtils;
     return {
       ...obj,
       dt: getDateString(obj.dt, this.dateOptions[type]),

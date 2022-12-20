@@ -1,5 +1,5 @@
 import DOMUtils from '../../utils/DOMUtils';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 // TODO split view
 export default class Header {

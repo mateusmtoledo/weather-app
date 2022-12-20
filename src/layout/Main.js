@@ -1,8 +1,8 @@
-import currentWeather from '../../currentWeather';
-import DOMUtils from '../../utils/DOMUtils';
-import DailyForecast from '../Forecast/DailyForecast';
-import HourlyForecast from '../Forecast/HourlyForecast';
-import dataSet from '../../data';
+import DOMUtils from '../utils/DOMUtils';
+import DailyForecast from '../components/Forecast/DailyForecast';
+import HourlyForecast from '../components/Forecast/HourlyForecast';
+import dataSet from '../data';
+import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
 
 // TODO split view
 export default class Main {
@@ -14,6 +14,7 @@ export default class Main {
       dataSet.cloudiness,
       dataSet.humidity,
     ]);
+    this.currentWeather = new CurrentWeather();
     this.element = this.generateMainElement();
   }
 
@@ -29,7 +30,7 @@ export default class Main {
     return DOMUtils.createElement(
       'main',
       {},
-      currentWeather,
+      this.currentWeather.element,
       forecastContainer
     );
   }
