@@ -27,28 +27,22 @@ export default class ForecastCard {
     });
     const weatherIcon = DOMUtils.createElement('img', {
       src: 'https://openweathermap.org/img/wn/01n@2x.png',
+      width: '64px',
+      height: '64px',
     });
-    const conditionContainer = DOMUtils.createElement(
-      'div',
-      {
-        class: 'condition-container', // FIXME probably unecessary element
-      },
-      weatherIcon
-    );
     const weatherDescription = DOMUtils.createElement('p', {}, '--');
     const weatherCondition = DOMUtils.createElement(
       'div',
       {
         class: 'weather-condition',
       },
-      conditionContainer,
+      weatherIcon,
       weatherDescription
     );
-
     const cardChildren = [h3, weatherCondition, dataContainer];
     if (type === 'Daily')
       cardChildren.splice(
-        2,
+        1,
         0,
         ForecastCard.generateMinMaxTemperatureElement()
       );
@@ -77,15 +71,13 @@ export default class ForecastCard {
       },
       '°C'
     );
-    const max = DOMUtils.createElement('p', {}, maxValue, maxUnit);
-    const maxText = DOMUtils.createElement('p', {}, 'MAX');
-    const maxDiv = DOMUtils.createElement(
-      'div',
+    const max = DOMUtils.createElement(
+      'p',
       {
-        class: 'max', // TODO naming
+        class: 'max-temperature',
       },
-      max,
-      maxText
+      maxValue,
+      maxUnit
     );
 
     const minValue = DOMUtils.createElement(
@@ -102,24 +94,22 @@ export default class ForecastCard {
       },
       '°C'
     );
-    const min = DOMUtils.createElement('p', {}, minValue, minUnit);
-    const minText = DOMUtils.createElement('p', {}, 'MIN');
-    const minDiv = DOMUtils.createElement(
-      'div',
+    const min = DOMUtils.createElement(
+      'p',
       {
-        class: 'min',
+        class: 'min-temperature',
       },
-      min,
-      minText
+      minValue,
+      minUnit
     );
 
     return DOMUtils.createElement(
       'div',
       {
-        class: 'temperature-maxmin', // TODO naming
+        class: 'temperature-minmax',
       },
-      maxDiv,
-      minDiv
+      max,
+      min
     );
   }
 
@@ -131,18 +121,24 @@ export default class ForecastCard {
       },
       '--'
     );
-    const desc = DOMUtils.createElement('p', {}, infoObj.name); // TODO naming
-    const image = DOMUtils.createElement('img', {
-      alt: infoObj.name,
-      src: infoObj.icon,
-    });
+    const dataName = DOMUtils.createElement(
+      'p',
+      {
+        class: 'data-name',
+      },
+      infoObj.name
+    );
+    // const image = DOMUtils.createElement('img', {
+    //   alt: infoObj.name,
+    //   src: infoObj.icon,
+    // });
     const legend = DOMUtils.createElement(
       'div',
       {
         class: 'description',
       },
-      image,
-      desc
+      // image,
+      dataName
     );
     const container = DOMUtils.createElement(
       'div',
@@ -161,13 +157,11 @@ export default class ForecastCard {
     this.weatherConditionDesc.textContent = StringUtils.capitalize(
       data.weather[0].description
     );
-    if (this.element.querySelector('.temperature-maxmin')) {
-      this.element.querySelector('.max .value').textContent = Math.round(
-        data.temp.max
-      );
-      this.element.querySelector('.min .value').textContent = Math.round(
-        data.temp.min
-      );
+    if (this.element.querySelector('.temperature-minmax')) {
+      this.element.querySelector('.max-temperature .value').textContent =
+        Math.round(data.temp.max);
+      this.element.querySelector('.min-temperature .value').textContent =
+        Math.round(data.temp.min);
     }
     dataArr.forEach((datum) => {
       this.element.querySelector(`.data.${datum.varName} .value`).textContent =

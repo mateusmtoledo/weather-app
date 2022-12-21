@@ -18,8 +18,8 @@ function factory(name, icon, varName, unit) {
 }
 
 const dataSet = {
-  temperature: factory('Temp', THERMOMETER, 'temp', '°C'),
-  rainProbability: factory('Rain', RAIN_PROBABILITY, 'pop', '%'),
+  temperature: factory('Temperature', THERMOMETER, 'temp', '°C'),
+  rainProbability: factory('Rain prob.', RAIN_PROBABILITY, 'pop', '%'),
   feelsLike: factory('Feels like', THERMOMETER, 'feels_like', '°C'),
   windSpeed: factory('Wind speed', WIND_SPEED, 'wind_speed', ' m/s'),
   cloudiness: factory('Cloudiness', CLOUDINESS, 'clouds', '%'),

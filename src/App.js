@@ -9,7 +9,9 @@ export default class App {
     this.main = new Main();
     this.element = DOMUtils.createElement(
       'div',
-      {},
+      {
+        class: 'app',
+      },
       this.header.element,
       this.main.element
     );

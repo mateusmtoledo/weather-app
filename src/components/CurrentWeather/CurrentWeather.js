@@ -52,13 +52,26 @@ export default class CurrentWeather {
       },
       '--'
     );
-    const cityInfo = DOMUtils.createElement(
+
+    const weatherIcon = DOMUtils.createElement('img', {
+      src: 'https://openweathermap.org/img/wn/01n@2x.png',
+      width: '96px',
+      height: '96px',
+    });
+    const weatherDescription = DOMUtils.createElement(
+      'p',
+      {
+        class: 'description',
+      },
+      '--'
+    );
+    const weatherCondition = DOMUtils.createElement(
       'div',
       {
-        class: 'city-info',
+        class: 'weather-condition',
       },
-      cityName,
-      localDate
+      weatherIcon,
+      weatherDescription
     );
 
     const temperatureValue = DOMUtils.createElement(
@@ -84,45 +97,19 @@ export default class CurrentWeather {
       spanSmall
     );
 
-    const weatherIcon = DOMUtils.createElement('img', {
-      src: 'https://openweathermap.org/img/wn/01n@2x.png',
+    const cityInfo = DOMUtils.createElement(
+      'div',
+      {
+        class: 'city-info',
+      },
+      cityName,
+      localDate,
+      temperature
+    );
+
+    const weatherDataContainer = DOMUtils.createElement('div', {
+      class: 'data-container',
     });
-    const iconContainer = DOMUtils.createElement(
-      'div',
-      {
-        class: 'icon-container', // FIXME element might not be needed
-      },
-      weatherIcon
-    );
-    const weatherDescription = DOMUtils.createElement(
-      'p',
-      {
-        class: 'description',
-      },
-      '--'
-    );
-    const weatherCondition = DOMUtils.createElement(
-      'div',
-      {
-        class: 'weather-condition',
-      },
-      iconContainer,
-      weatherDescription
-    );
-
-    const weatherExtra = DOMUtils.createElement('div', {
-      class: 'extra',
-    }); // TODO naming
-
-    const weatherInfo = DOMUtils.createElement(
-      'div',
-      {
-        class: 'weather-info',
-      },
-      temperature,
-      weatherCondition,
-      weatherExtra
-    );
 
     return DOMUtils.createElement(
       'div',
@@ -130,7 +117,8 @@ export default class CurrentWeather {
         class: 'current-weather',
       },
       cityInfo,
-      weatherInfo
+      weatherCondition,
+      weatherDataContainer
     );
   }
 
@@ -142,7 +130,13 @@ export default class CurrentWeather {
       },
       '--'
     );
-    const desc = DOMUtils.createElement('p', {}, obj.name);
+    const desc = DOMUtils.createElement(
+      'p',
+      {
+        class: 'data-name',
+      },
+      obj.name
+    );
     const image = DOMUtils.createElement('img', {
       alt: obj.name,
       src: obj.icon,
@@ -156,7 +150,7 @@ export default class CurrentWeather {
       desc
     );
 
-    this.element.querySelector('.extra').append(
+    this.element.querySelector('.data-container').append(
       DOMUtils.createElement(
         'div',
         {
