@@ -14,14 +14,13 @@ export default class Forecast {
   }
 
   // TODO review
-  generateForecastElement(title) {
+  generateForecastElement() {
     for (let i = 0; i < this.numberOfCards; i += 1) {
       this.cards[i] = new Card('Title', this.title);
       for (let j = 0; j < this.dataToDisplay.length; j += 1) {
         this.cards[i].addInfo(this.dataToDisplay[j]); // FIXME this probably does not belong here
       }
     }
-    const h2 = DOMUtils.createElement('h2', {}, title);
     const cardContainer = DOMUtils.createElement(
       'div',
       {
@@ -33,8 +32,8 @@ export default class Forecast {
       'div',
       {
         class: 'forecast',
+        'data-type': this.title.toLowerCase(),
       },
-      h2,
       cardContainer
     );
   }

@@ -152,7 +152,7 @@ main {
 }
 
 .forecast {
-  flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -216,22 +216,57 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
 }
 
 .weather-condition img {
   display: block;
 }
 
-.weather-condition p {
-  font-weight: 700;
-}
-
 .forecast-container {
   padding: 16px 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
+}
+
+.forecast-container .buttons-container {
+  display: flex;
+  gap: 32px;
+}
+
+.switch-tab-btn {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.switch-tab-btn:before {
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  transition: all 0.5s;
+  background-color: black;
+}
+
+.switch-tab-btn.active:before {
+  width: 100%;
+  left: 0;
+  background-color: var(--color-cta);
+}
+
+.switch-tab-btn:hover:before {
+  width: 100%;
+  left: 0;
 }
 
 .card {
@@ -247,7 +282,7 @@ main {
 .forecast .card {
   display: grid;
   grid-template-rows: max-content 1fr;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 130px 1fr;
   gap: 8px 48px;
   align-items: center;
   justify-content: center;
@@ -270,6 +305,12 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.forecast .card .temperature {
+  display: flex;
+  gap: 16px;
+  font-weight: 300;
 }
 
 @media (max-width: 975px) {
