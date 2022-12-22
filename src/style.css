@@ -25,6 +25,7 @@
 header {
   background-color: #005268;
   display: flex;
+  gap: 16px;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
@@ -104,7 +105,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 96px;
+  gap: 64px;
   padding: 32px 8px;
   text-align: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -120,7 +121,7 @@ main {
 .current-weather .city-name {
   font-size: 3rem;
   color: var(--color-cta);
-  max-width: 300px;
+  max-width: 280px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -150,6 +151,13 @@ main {
   grid-template-columns: repeat(3, max-content);
 }
 
+.forecast {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .forecast .weather-condition img {
   height: 48px;
   object-fit: cover;
@@ -159,14 +167,14 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .forecast .card-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
-  width: max-content;
 }
 
 .data-container {
@@ -219,6 +227,7 @@ main {
 }
 
 .forecast-container {
+  padding: 16px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,9 +253,59 @@ main {
   justify-content: center;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  max-width: 610px;
+  width: 100%;
 }
 
 .forecast .title {
   grid-column: 1 / -1;
   text-align: center;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 975px) {
+  .current-weather {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 8px 32px;
+  }
+  .current-weather .data-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+  .weather-condition {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 650px) {
+  .logo-desktop {
+    display: none;
+  }
+  .logo-mobile {
+    display: block;
+  }
+  .current-weather .data-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    gap: 16px;
+    width: 100%;
+  }
+  .forecast .card {
+    grid-template-rows: max-content max-content 1fr;
+    grid-template-columns: 1fr;
+  }
+  .forecast .data-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
 }
