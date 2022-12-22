@@ -43,13 +43,11 @@ h2 {
 }
 
 .search-bar input {
-  padding: 4px 8px 4px 32px;
+  flex: 1;
   color: white;
   font-size: 1rem;
-  border-radius: 16px;
-  border: 2px solid white;
-  width: 100%;
-  background-color: transparent;
+  background: none;
+  border: none;
 }
 
 .search-bar input::placeholder {
@@ -61,30 +59,24 @@ h2 {
 }
 
 .search-bar {
-  position: relative;
+  padding: 2px 6px;
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 16px;
+  border: 2px solid white;
+  width: 100%;
   max-width: 300px;
 }
 
-.search-bar label {
-  height: 16px;
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .search-bar .icon {
-  height: 100%;
-  position: absolute;
+  height: 16px;
+  display: block;
 }
 
 .search-bar button {
   font-size: 0.9rem;
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
   border: none;
   background-color: transparent;
   color: var(--color-cta);
@@ -120,7 +112,6 @@ main {
 
 .current-weather .city-name {
   font-size: 3rem;
-  color: var(--color-cta);
   max-width: 280px;
   overflow: hidden;
   text-overflow: ellipsis;

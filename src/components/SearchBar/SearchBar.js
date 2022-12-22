@@ -31,14 +31,8 @@ export default class SearchBar {
       },
       'Go!'
     );
-
-    searchButton.addEventListener('click', async () => {
-      if (!searchInput.value) return;
-      Api.getWeatherByLocationName(searchInput.value);
-    });
-
-    return DOMUtils.createElement(
-      'div',
+    const searchContainer = DOMUtils.createElement(
+      'form',
       {
         class: 'search-bar',
       },
@@ -46,5 +40,13 @@ export default class SearchBar {
       searchInput,
       searchButton
     );
+    searchContainer.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!searchInput.value) return;
+      await Api.getWeatherByLocationName(searchInput.value);
+      searchInput.value = '';
+    });
+
+    return searchContainer;
   }
 }
