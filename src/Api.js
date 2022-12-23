@@ -1,3 +1,4 @@
+import Loader from './components/Loader/Loader';
 import pubSub from './pubSub';
 import WeatherUtils from './utils/WeatherUtils';
 
@@ -27,8 +28,11 @@ export default class Api {
   }
 
   static async getWeatherByLocationName(locationName) {
+    const loader = new Loader();
+    loader.show();
     const locationData = await Api.getLocationData(locationName);
     const weatherData = await Api.getWeatherByCoordinates(locationData);
+    loader.remove();
     weatherData.city = locationData.name;
     weatherData.country = locationData.country;
     const weather = new WeatherUtils(weatherData).getNormalizedData();
