@@ -2,7 +2,8 @@
 
 :root {
   font-size: 16px;
-  --color-cta: #1eff57;
+  --color-cta: #00f5ff;
+  --color-secondary: #45496b;
 }
 
 *,
@@ -26,7 +27,7 @@ body {
 }
 
 header {
-  background-color: #005268;
+  background-color: var(--color-secondary);
   display: flex;
   gap: 16px;
   justify-content: space-between;
@@ -95,7 +96,7 @@ main {
 }
 
 .current-weather {
-  background-color: #005268;
+  background-color: var(--color-secondary);
   width: 100%;
   display: flex;
   align-items: center;
@@ -103,8 +104,6 @@ main {
   gap: 64px;
   padding: 32px 8px;
   text-align: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .current-weather .city-info {
@@ -266,7 +265,7 @@ main {
 .card {
   border-radius: 8px;
   padding: 24px;
-  background: #005268;
+  background-color: var(--color-secondary);
 }
 
 .card h3 {
@@ -319,14 +318,97 @@ main {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.loader {
-  border: 12px solid #f3f3f3;
-  border-top: 12px solid #3498db;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 2s linear infinite;
+.cloud-container {
+  position: relative;
+  width: 160px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50px;
 }
+
+.cloud-container:before {
+  content: '';
+  position: absolute;
+  height: 55px;
+  width: 55px;
+  top: -25px;
+  left: 20px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 45px 5px 0 15px white;
+}
+
+.cloud {
+  position: absolute;
+  background-color: #ffffff00;
+  overflow: hidden;
+}
+
+.cloud:before {
+  content: '';
+  background-color: var(--color-cta);
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  bottom: 0;
+  animation: loading 2s infinite;
+}
+
+.cloud:nth-child(2):before {
+  bottom: -20px;
+}
+
+@keyframes loading {
+  from {
+    transform: translateY(160px);
+  }
+  to {
+    transform: translateY(75px);
+  }
+}
+
+.cloud:nth-child(1) {
+  width: 160px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.cloud:nth-child(2) {
+  top: -25px;
+  left: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.cloud:nth-child(3) {
+  top: -35px;
+  left: 50px;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+}
+
+/* .cloud:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: -25px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 45px 0 0 15px white;
+}
+
+.cloud:after {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background-color: #3299d0;
+  top: 0;
+} */
 
 @keyframes spin {
   0% {

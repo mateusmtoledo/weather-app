@@ -14,15 +14,24 @@ export default class Loader {
   }
 
   static generateLoaderElement() {
-    const loader = DOMUtils.createElement('div', {
-      class: 'loader',
-    });
+    const cloudPieces = new Array(3).fill().map(() =>
+      DOMUtils.createElement('div', {
+        class: 'cloud',
+      })
+    );
+    const cloudContainer = DOMUtils.createElement(
+      'div',
+      {
+        class: 'cloud-container',
+      },
+      ...cloudPieces
+    );
     return DOMUtils.createElement(
       'div',
       {
         class: 'overlay',
       },
-      loader
+      cloudContainer
     );
   }
 }
