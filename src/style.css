@@ -52,6 +52,7 @@ h2 {
   font-size: 1rem;
   background: none;
   border: none;
+  min-width: 0;
 }
 
 .search-bar input::placeholder {
@@ -70,8 +71,8 @@ h2 {
   gap: 8px;
   border-radius: 16px;
   border: 2px solid white;
-  width: 100%;
-  max-width: 300px;
+  max-width: 250px;
+  min-width: 0;
 }
 
 .search-bar .icon {
@@ -290,16 +291,6 @@ main {
   text-align: center;
 }
 
-.logo-mobile {
-  display: none;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .forecast .card .temperature {
   display: flex;
   gap: 16px;
@@ -389,34 +380,10 @@ main {
   border-radius: 50%;
 }
 
-/* .cloud:before {
-  content: '';
-  position: absolute;
-  left: 20px;
-  top: -25px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background-color: white;
-  box-shadow: 45px 0 0 15px white;
-}
-
-.cloud:after {
-  content: '';
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  background-color: #3299d0;
-  top: 0;
-} */
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 @media (max-width: 975px) {
@@ -436,12 +403,6 @@ main {
 }
 
 @media (max-width: 650px) {
-  .logo-desktop {
-    display: none;
-  }
-  .logo-mobile {
-    display: block;
-  }
   .current-weather .data-container {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: none;
@@ -454,5 +415,8 @@ main {
   }
   .forecast .data-container {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  .logo-container h1 {
+    display: none;
   }
 }

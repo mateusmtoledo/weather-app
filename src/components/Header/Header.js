@@ -1,6 +1,6 @@
 import DOMUtils from '../../utils/DOMUtils';
 import SearchBar from '../SearchBar/SearchBar';
-import LOGO_ICON from '../../icons/logo.svg';
+import LOGO_IMG from '../../img/logo.svg';
 
 // TODO split view
 export default class Header {
@@ -20,14 +20,22 @@ export default class Header {
     const logo = DOMUtils.createElement('img', {
       class: 'logo-mobile',
       width: '36px',
-      src: LOGO_ICON,
+      height: 'auto',
+      src: LOGO_IMG,
       alt: 'weather app',
     });
+    const logoContainer = DOMUtils.createElement(
+      'div',
+      {
+        class: 'logo-container',
+      },
+      logo,
+      h1
+    );
     return DOMUtils.createElement(
       'header',
       {},
-      h1,
-      logo,
+      logoContainer,
       this.searchBar.element
     );
   }
