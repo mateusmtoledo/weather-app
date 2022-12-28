@@ -2,7 +2,7 @@
 
 :root {
   font-size: 16px;
-  --color-cta: #fdff44;
+  --color-cta: #3aff5b;
   --color-background: #e1e8ef;
   --color-current-weather: #0097cf;
   --color-card: #ffffff;
@@ -20,14 +20,15 @@
 
 body {
   background-color: var(--color-background);
+  color: white;
 }
 
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  color: white;
   font-family: 'Poppins', sans-serif;
+  background-color: var(--color-current-weather);
 }
 
 header {
@@ -36,14 +37,13 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  background-color: var(--color-current-weather);
 }
 
 h1 {
   font-size: 1.2rem;
   font-family: 'Comfortaa', cursive;
   letter-spacing: 2px;
-  color: var(--color-cta);
+  color: white;
 }
 
 .search-bar input {
@@ -104,7 +104,6 @@ main {
   gap: 64px;
   padding: 32px 8px;
   text-align: center;
-  background-color: var(--color-current-weather);
 }
 
 .current-weather .city-info {
@@ -119,8 +118,8 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 300;
-  text-shadow: 1px 1px black;
   color: var(--color-cta);
+  text-shadow: 1px 1px black;
 }
 
 .current-weather .temperature {
@@ -228,6 +227,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 24px;
+  background-color: var(--color-background);
 }
 
 .forecast-container .buttons-container {
