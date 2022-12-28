@@ -138,7 +138,7 @@ export default class ForecastCard {
 
   update(data, dataArr) {
     this.title.textContent = data.dt;
-    this.weatherConditionImg.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    this.weatherConditionImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     this.weatherConditionDesc.textContent = StringUtils.capitalize(
       data.weather[0].description
     );

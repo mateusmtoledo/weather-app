@@ -28,7 +28,7 @@ export default class CurrentWeather {
     );
     this.element.querySelector(
       '.weather-condition img'
-    ).src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+    ).src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
     this.element.querySelector('.weather-condition .description').textContent =
       StringUtils.capitalize(data.current.weather[0].description);
     this.dataArr.forEach((datum) => {
