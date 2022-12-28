@@ -2,8 +2,12 @@
 
 :root {
   font-size: 16px;
-  --color-cta: #00f5ff;
-  --color-secondary: #45496b;
+  --color-cta: #fdff44;
+  --color-background: #e1e8ef;
+  --color-current-weather: #0097cf;
+  --color-card: #ffffff;
+  --box-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 *,
@@ -15,7 +19,7 @@
 }
 
 body {
-  background-color: #ebebeb;
+  background-color: var(--color-background);
 }
 
 .app {
@@ -27,12 +31,12 @@ body {
 }
 
 header {
-  background-color: var(--color-secondary);
   display: flex;
   gap: 16px;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
+  background-color: var(--color-current-weather);
 }
 
 h1 {
@@ -40,10 +44,6 @@ h1 {
   font-family: 'Comfortaa', cursive;
   letter-spacing: 2px;
   color: var(--color-cta);
-}
-
-h2 {
-  color: black;
 }
 
 .search-bar input {
@@ -97,7 +97,6 @@ main {
 }
 
 .current-weather {
-  background-color: var(--color-secondary);
   width: 100%;
   display: flex;
   align-items: center;
@@ -105,6 +104,7 @@ main {
   gap: 64px;
   padding: 32px 8px;
   text-align: center;
+  background-color: var(--color-current-weather);
 }
 
 .current-weather .city-info {
@@ -118,6 +118,9 @@ main {
   max-width: 280px;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 300;
+  text-shadow: 1px 1px black;
+  color: var(--color-cta);
 }
 
 .current-weather .temperature {
@@ -155,6 +158,7 @@ main {
 .forecast .weather-condition img {
   height: 48px;
   object-fit: cover;
+  filter: drop-shadow(0 0 1px black);
 }
 
 .weather-data-container {
@@ -168,7 +172,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
 }
 
 .data-container {
@@ -223,7 +227,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 24px;
 }
 
 .forecast-container .buttons-container {
@@ -255,7 +259,7 @@ main {
 .switch-tab-btn.active:before {
   width: 100%;
   left: 0;
-  background-color: var(--color-cta);
+  background-color: var(--color-current-weather);
 }
 
 .switch-tab-btn:hover:before {
@@ -266,7 +270,9 @@ main {
 .card {
   border-radius: 8px;
   padding: 24px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-card);
+  color: black;
+  box-shadow: var(--box-shadow-card);
 }
 
 .card h3 {
@@ -280,8 +286,6 @@ main {
   gap: 8px 48px;
   align-items: center;
   justify-content: center;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
-    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   max-width: 610px;
   width: 100%;
 }
@@ -337,7 +341,7 @@ main {
 
 .cloud:before {
   content: '';
-  background-color: var(--color-cta);
+  background-color: var(--color-current-weather);
   position: absolute;
   height: 160px;
   width: 160px;
@@ -384,6 +388,7 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 @media (max-width: 975px) {

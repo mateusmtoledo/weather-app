@@ -39,7 +39,7 @@ export default class CurrentWeather {
 
   static generateCurrentWeatherElement() {
     const cityName = DOMUtils.createElement(
-      'p',
+      'h2',
       {
         class: 'city-name',
       },
