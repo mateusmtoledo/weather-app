@@ -214,6 +214,7 @@ main {
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  text-align: center;
 }
 
 .weather-condition img {
