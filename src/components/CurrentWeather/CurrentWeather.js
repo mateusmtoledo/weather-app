@@ -1,4 +1,11 @@
-import dataSet from '../../data';
+import {
+  feelsLike,
+  windSpeed,
+  cloudiness,
+  humidity,
+  visibility,
+  uvIndex,
+} from '../../data';
 import pubSub from '../../pubSub';
 import StringUtils from '../../utils/StringUtils';
 import DOMUtils from '../../utils/DOMUtils';
@@ -7,12 +14,12 @@ export default class CurrentWeather {
   constructor() {
     this.element = CurrentWeather.generateCurrentWeatherElement();
     this.dataArr = [
-      dataSet.feelsLike,
-      dataSet.windSpeed,
-      dataSet.cloudiness,
-      dataSet.humidity,
-      dataSet.visibility,
-      dataSet.uvIndex,
+      feelsLike,
+      windSpeed,
+      cloudiness,
+      humidity,
+      visibility,
+      uvIndex,
     ];
     this.dataArr.forEach((datum) => {
       this.addInfo(datum);

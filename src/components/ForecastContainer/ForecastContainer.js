@@ -1,21 +1,28 @@
 import DailyForecast from '../Forecast/DailyForecast';
 import HourlyForecast from '../Forecast/HourlyForecast';
-import dataSet from '../../data';
+import {
+  sunrise,
+  sunset,
+  cloudiness,
+  rainProbability,
+  humidity,
+  uvIndex,
+} from '../../data';
 import DOMUtils from '../../utils/DOMUtils';
 
 export default class ForecastContainer {
   constructor() {
     this.dailyForecast = new DailyForecast([
-      dataSet.sunrise,
-      dataSet.sunset,
-      dataSet.cloudiness,
-      dataSet.rainProbability,
+      sunrise,
+      sunset,
+      cloudiness,
+      rainProbability,
     ]);
     this.hourlyForecast = new HourlyForecast([
-      dataSet.rainProbability,
-      dataSet.cloudiness,
-      dataSet.humidity,
-      dataSet.uvIndex,
+      rainProbability,
+      cloudiness,
+      humidity,
+      uvIndex,
     ]);
     this.element = this.generateForecastContainerElement();
   }

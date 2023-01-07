@@ -19,8 +19,16 @@ module.exports = {
       favicon: './src/img/favicon.ico',
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.ts'],
+  },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
