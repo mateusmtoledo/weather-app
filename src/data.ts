@@ -8,7 +8,7 @@ import UV_INDEX from './icons/weather/uv-index.svg';
 import VISIBILITY from './icons/weather/visibility.svg';
 import RAIN_PROBABILITY from './icons/weather/rain-probability.svg';
 
-type DataType = {
+export type DataType = {
   title: string;
   icon: string;
   varName: string;

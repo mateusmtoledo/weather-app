@@ -4,8 +4,8 @@ import LOGO_IMG from '../../img/logo.svg';
 
 // TODO split view
 export default class Header {
-  constructor() {
-    this.searchBar = new SearchBar();
+  constructor(setCity) {
+    this.searchBar = new SearchBar(setCity);
     this.element = this.generateHeaderElement();
   }
 

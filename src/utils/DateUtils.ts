@@ -1,5 +1,5 @@
 export default class DateUtils {
-  static getDateOptions(timeZone) {
+  static getDateOptions(timeZone: string) {
     return {
       daily: {
         timeZone,
@@ -32,7 +32,11 @@ export default class DateUtils {
     };
   }
 
-  static getDateString(date, options, locale = 'en-UK') {
+  static getDateString(
+    date: number,
+    options: Intl.DateTimeFormatOptions,
+    locale = 'en-UK'
+  ) {
     return new Date(date * 1000).toLocaleString(locale, options);
   }
 }

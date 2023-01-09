@@ -122,12 +122,12 @@ main {
   text-shadow: 1px 1px black;
 }
 
-.current-weather .temperature {
+.current-weather .single-temperature .value {
   font-size: 4rem;
   text-align: center;
 }
 
-.current-weather .temperature .small {
+.current-weather .single-temperature .unit {
   font-size: 1.5rem;
   position: relative;
   bottom: 32px;
@@ -152,6 +152,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 24px;
 }
 
 .forecast .weather-condition img {
@@ -164,14 +165,6 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-.forecast .card-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
 }
 
 .data-container {
@@ -291,7 +284,7 @@ main {
   width: 100%;
 }
 
-.forecast .title {
+.forecast .time {
   grid-column: 1 / -1;
   text-align: center;
 }
@@ -300,6 +293,7 @@ main {
   display: flex;
   gap: 16px;
   font-weight: 300;
+  justify-content: center;
 }
 
 .overlay {

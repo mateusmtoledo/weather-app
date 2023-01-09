@@ -4,9 +4,12 @@ import ForecastContainer from '../components/ForecastContainer/ForecastContainer
 
 // TODO split view
 export default class Main {
-  constructor() {
-    this.forecastContainer = new ForecastContainer();
-    this.currentWeather = new CurrentWeather();
+  constructor(data) {
+    this.forecastContainer = new ForecastContainer({
+      daily: data.daily,
+      hourly: data.hourly,
+    });
+    this.currentWeather = new CurrentWeather(data.current, data.city);
     this.element = this.generateMainElement();
   }
 
@@ -16,9 +19,17 @@ export default class Main {
       {
         class: 'weather-data-container',
       },
-      this.currentWeather.element,
+      this.currentWeather,
       this.forecastContainer.element
     );
     return DOMUtils.createElement('main', {}, weatherDataContainer);
+  }
+
+  update(newData) {
+    this.currentWeather.update(newData.current, newData.city);
+    this.forecastContainer.update({
+      daily: newData.daily,
+      hourly: newData.hourly,
+    });
   }
 }

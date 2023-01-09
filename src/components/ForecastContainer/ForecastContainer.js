@@ -1,29 +1,12 @@
 import DailyForecast from '../Forecast/DailyForecast';
-import HourlyForecast from '../Forecast/HourlyForecast';
-import {
-  sunrise,
-  sunset,
-  cloudiness,
-  rainProbability,
-  humidity,
-  uvIndex,
-} from '../../data';
 import DOMUtils from '../../utils/DOMUtils';
+import HourlyForecast from '../Forecast/HourlyForecast';
 
 export default class ForecastContainer {
-  constructor() {
-    this.dailyForecast = new DailyForecast([
-      sunrise,
-      sunset,
-      cloudiness,
-      rainProbability,
-    ]);
-    this.hourlyForecast = new HourlyForecast([
-      rainProbability,
-      cloudiness,
-      humidity,
-      uvIndex,
-    ]);
+  constructor(data) {
+    this.dailyForecast = new DailyForecast(data.daily);
+    this.hourlyForecast = new HourlyForecast(data.hourly);
+    this.active = this.dailyForecast;
     this.element = this.generateForecastContainerElement();
   }
 
@@ -32,28 +15,28 @@ export default class ForecastContainer {
       'button',
       {
         type: 'button',
-        class: 'switch-tab-btn',
+        class: 'switch-tab-btn active',
         'data-forecast': 'daily',
       },
       'Daily'
     );
 
     dailySwitchButton.addEventListener('click', () =>
-      this.switchTab(this.dailyForecast.element)
+      this.switchTab(this.dailyForecast)
     );
 
     const hourlySwitchButton = DOMUtils.createElement(
       'button',
       {
         type: 'button',
-        class: 'switch-tab-btn active',
+        class: 'switch-tab-btn',
         'data-forecast': 'hourly',
       },
       'Hourly'
     );
 
     hourlySwitchButton.addEventListener('click', () =>
-      this.switchTab(this.hourlyForecast.element)
+      this.switchTab(this.hourlyForecast)
     );
 
     const buttonsContainer = DOMUtils.createElement(
@@ -71,14 +54,13 @@ export default class ForecastContainer {
         class: 'forecast-container',
       },
       buttonsContainer,
-      this.hourlyForecast.element
+      this.dailyForecast
     );
   }
 
   switchTab(newTab) {
-    const activeForecast = this.element.querySelector('.forecast');
-    if (activeForecast === newTab) return;
-    const forecastType = activeForecast.dataset.type;
+    if (this.active === newTab) return;
+    const forecastType = this.active.dataset.type;
     this.element
       .querySelector(`.switch-tab-btn[data-forecast=${forecastType}`)
       .classList.remove('active');
@@ -86,7 +68,17 @@ export default class ForecastContainer {
     this.element
       .querySelector(`.switch-tab-btn[data-forecast=${newForecastType}`)
       .classList.add('active');
-    this.element.removeChild(activeForecast);
+    this.element.removeChild(this.active);
     this.element.append(newTab);
+    this.active = newTab;
+  }
+
+  update(newData) {
+    this.dailyForecast.remove();
+    this.hourlyForecast.remove();
+    this.dailyForecast = new DailyForecast(newData.daily);
+    this.hourlyForecast = new HourlyForecast(newData.hourly);
+    this.active = this.dailyForecast;
+    this.element.append(this.dailyForecast);
   }
 }
