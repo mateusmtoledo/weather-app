@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-  Built with Vanilla (Pure) JavaScript and CSS, no external libraries in production.
+  Built with TypeScript and CSS, with zero production dependencies.
 </p>
 
 <p align="center">
-  <img src="https://skills.thijs.gg/icons?i=html,css,js,webpack" alt="Built with HTML, CSS, JavaScript, Webpack" />
+  <img src="https://skills.thijs.gg/icons?i=html,css,ts,webpack" alt="Built with HTML, CSS, Typescript, Webpack" />
 </p>
 
 <p align="center">
