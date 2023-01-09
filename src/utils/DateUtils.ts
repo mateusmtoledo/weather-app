@@ -34,7 +34,7 @@ export default class DateUtils {
 
   static getDateString(
     date: number,
-    options: Intl.DateTimeFormatOptions,
+    options: Partial<Intl.DateTimeFormatPartTypesRegistry>,
     locale = 'en-UK'
   ) {
     return new Date(date * 1000).toLocaleString(locale, options);

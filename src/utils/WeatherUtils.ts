@@ -1,12 +1,18 @@
 import DateUtils from './DateUtils';
 
 export default class WeatherUtils {
-  constructor(weatherData) {
+  dateOptions: ReturnType<typeof DateUtils['getDateOptions']>;
+
+  data: any; // TODO fix data type
+
+  // TODO fix data type
+  constructor(weatherData: any) {
     this.data = weatherData;
     this.dateOptions = DateUtils.getDateOptions(this.data.timezone);
   }
 
-  normalizeObject(obj, type) {
+  // TODO fix data type
+  normalizeObject(obj: any, type: 'current' | 'daily' | 'hourly' | 'minutely') {
     const { getDateString } = DateUtils;
     const { replaceIfNotUndefined } = WeatherUtils;
     return {
@@ -32,19 +38,22 @@ export default class WeatherUtils {
     };
   }
 
-  static replaceIfNotUndefined(value, newValue) {
+  static replaceIfNotUndefined<T>(value: any, newValue: T): T | undefined {
     if (value === undefined) return undefined;
     return newValue;
   }
 
+  // TODO fix data type
   getNormalizedData() {
     const { data } = this;
     return {
       ...data,
       current: this.normalizeObject(data.current, 'current'),
-      daily: data.daily.map((obj) => this.normalizeObject(obj, 'daily')),
-      hourly: data.hourly.map((obj) => this.normalizeObject(obj, 'hourly')),
-      minutely: data.minutely.map((obj) =>
+      daily: data.daily.map((obj: any) => this.normalizeObject(obj, 'daily')),
+      hourly: data.hourly.map((obj: any) =>
+        this.normalizeObject(obj, 'hourly')
+      ),
+      minutely: data.minutely.map((obj: any) =>
         this.normalizeObject(obj, 'minutely')
       ),
     };

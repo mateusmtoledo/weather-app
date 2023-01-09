@@ -1,33 +1,34 @@
 import Main from './layout/Main';
-import DOMUtils from './utils/DOMUtils';
 import Header from './components/Header/Header';
 import Api from './Api';
 
-// TODO split view
-export default class App {
+export default class App extends HTMLDivElement {
+  main: Main | null;
+
+  header: Header;
+
   constructor() {
+    super();
+    this.classList.add('app');
+
     this.setCity = this.setCity.bind(this);
     this.header = new Header(this.setCity);
     this.main = null;
-    this.element = DOMUtils.createElement(
-      'div',
-      {
-        class: 'app',
-      },
-      this.header
-    );
+    this.append(this.header);
   }
 
   async init() {
     await this.setCity('London');
-    document.body.append(this.element);
+    document.body.append(this);
   }
 
-  async setCity(city) {
+  async setCity(city: string) {
     const data = await Api.getWeatherByLocationName(city);
     if (!this.main) {
       this.main = new Main(data);
-      this.element.append(this.main.element);
+      this.append(this.main);
     } else this.main.update(data);
   }
 }
+
+customElements.define('app-component', App, { extends: 'div' });
