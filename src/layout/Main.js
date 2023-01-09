@@ -20,7 +20,7 @@ export default class Main {
         class: 'weather-data-container',
       },
       this.currentWeather,
-      this.forecastContainer.element
+      this.forecastContainer
     );
     return DOMUtils.createElement('main', {}, weatherDataContainer);
   }
