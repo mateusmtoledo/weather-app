@@ -14,7 +14,7 @@ export default class App {
       {
         class: 'app',
       },
-      this.header.element
+      this.header
     );
   }
 
